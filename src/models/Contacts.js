@@ -9,6 +9,10 @@ const ContactsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Users',
     }],
+    lastMessage: {
+        type: String,
+        required: false,
+    }
 }, {
     timestamps: true,
 });

@@ -1,17 +1,10 @@
-const Contacts = require('../../../models/Chat');
+const Contacts = require('../../../models/Contacts');
 
 module.exports = {
     async index(req, res) {
-        
         try {
-            const { id } = req.params;
             
-            const message = await Chats.find({
-                                    $and: [
-                                        { user: req.user },
-                                        { contact: id}
-                                    ] 
-                                });
+            const message = await Contacts.find({ user: req.user });
 
             return res.status(200).json(message);
         } catch(err) {
@@ -21,23 +14,11 @@ module.exports = {
 
     async save(req, res) {
         try {
-            const { emitter, receptor, ...rest } = req.body;
-            console.log(req.user)
+            const { user, contact, ...rest } = req.body;
 
-            const loggedSocket = req.connectedUsers[req.user];
-            const targetSocket = req.connectedUsers[receptor];
+            const contacts = await Contacts.create({ user: req.user, contact, ...rest });
 
-            if (loggedSocket) {
-                req.io.to(loggedSocket).emit('message', targetDev);
-            }
-
-            if (targetSocket) {
-                req.io.to(targetSocket).emit('message', loggedDev);
-            }
-
-            const message = await Chats.create({ user: req.user, contact, ...rest });
-
-            return res.status(200).json(message);
+            return res.status(200).json(contacts);
         } catch (err) {
             return res.status(400).json(err);
         }

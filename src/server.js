@@ -25,7 +25,7 @@ const port = 7002;
  *  Database connection
  */
 
-mongoose.connect('mongodb+srv://chatdb:chatdb@cluster0-axbx2.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://chatdb:chatdb@cluster0-axbx2.mongodb.net/chatapp?retryWrites=true&w=majority', {
     useNewUrlParser: true,
 });
 

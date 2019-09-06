@@ -20,11 +20,11 @@ module.exports = {
     },
 
     async save(req, res) {
+        console.log(req.connectedUsers)
         try {
             const { emitter, receptor, ...rest } = req.body;
-            console.log(req.user)
-
-            const loggedSocket = req.connectedUsers[req.user];
+            const id = req.user
+            const loggedSocket = req.connectedUsers[id];
             const targetSocket = req.connectedUsers[receptor];
 
             if (loggedSocket) {
@@ -35,7 +35,7 @@ module.exports = {
                 req.io.to(targetSocket).emit('message', loggedDev);
             }
 
-            const message = await Chats.create({ emitter: req.user, receptor, ...rest });
+            const message = await Chats.create({ emitter: id, receptor, ...rest });
 
             return res.status(200).json(message);
         } catch (err) {

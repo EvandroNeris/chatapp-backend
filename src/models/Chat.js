@@ -9,10 +9,10 @@ const ChatsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Users',
     }],
-    message: {
-        type: String,
-        required: true, 
-    }
+    message: [{
+            type: String,
+            required: true, 
+    }]
 }, {
     timestamps: true,
 });

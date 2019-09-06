@@ -14,9 +14,9 @@ module.exports = {
 
     async save(req, res) {
         try {
-            const { user, contact, ...rest } = req.body;
+            const { user, email, ...rest } = req.body;
 
-            const contacts = await Contacts.create({ user: req.user, contact, ...rest });
+            const contacts = await Contacts.create({ user: req.user, email, ...rest });
 
             return res.status(200).json(contacts);
         } catch (err) {

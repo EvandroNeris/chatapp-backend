@@ -1,4 +1,5 @@
 const Contacts = require('../../../models/Contacts');
+const Users = require('../../../models/Users');
 
 module.exports = {
     async index(req, res) {
@@ -15,8 +16,8 @@ module.exports = {
     async save(req, res) {
         try {
             const { user, email, ...rest } = req.body;
-
-            const contacts = await Contacts.create({ user: req.user, email, ...rest });
+            const findContact = await Users.findOne({ email });
+            const contacts = await Contacts.create({ user: req.user, email, name: findContact.name, phone: findContact.phone, ...rest });
 
             return res.status(200).json(contacts);
         } catch (err) {

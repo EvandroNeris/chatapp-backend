@@ -9,6 +9,14 @@ const ContactsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Users',
     }],
+    name:[{            
+        type: Schema.Types.String,
+        ref: 'Users',
+    }],
+    phone: [{            
+        type: Schema.Types.String,
+        ref: 'Users',
+    }],
     lastMessage: {
         type: String,
         required: false,

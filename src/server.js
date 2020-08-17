@@ -20,7 +20,6 @@ mongoose.connect('mongodb+srv://chatdb:chatdb@cluster0-axbx2.mongodb.net/chatapp
 });
 
 
-
 app.use((req, res, next) => {
     req.io = io;
     req.connectedUsers = connectedUsers;
